@@ -7,7 +7,7 @@ export default [
     ]
   },
   {
-    path: '/login',
+    path: '/',
     component: () => import('layouts/default-top'),
     children: [
       { path: 'login', component: () => import('pages/login') }
