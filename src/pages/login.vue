@@ -8,6 +8,11 @@
 
 <script>
 export default {
-  name: 'PageIndex'
+  name: 'PageIndex',
+  data () {
+    return {
+
+    }
+  }
 }
 </script>
