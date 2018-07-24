@@ -8,7 +8,7 @@
       >
         <q-toolbar-title>
           CookAppsLab
-          <div slot="subtitle">created by team-ninja</div>
+          <div slot="subtitle">created by team-ninja </div>
         </q-toolbar-title>
       </q-toolbar>
     </q-layout-header>
