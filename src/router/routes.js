@@ -13,7 +13,6 @@ export default [
       { path: 'login', component: () => import('pages/login') }
     ]
   },
-
   { // Always leave this as last one
     path: '*',
     component: () => import('pages/404')
