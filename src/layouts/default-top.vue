@@ -29,7 +29,7 @@ export default {
     onClickForlogOut () {
       firebase.auth().signOut().then(() => {
         this.$q.dialog({title: 'ㅃㅃ!'}).then(() => {
-          this.$router.push('/')
+          this.$router.push('/login')
         })
       })
     }

@@ -32,7 +32,9 @@ export default {
         let provider = new firebase.auth.GoogleAuthProvider()
         firebase.auth().signInWithPopup(provider).then((result) => {
           let user = result.user.displayName
-          this.$q.dialog({title: '가입완료!', message: user})
+          this.$q.dialog({title: '가입완료!', message: user}).then(() => {
+            this.$router.push('/')
+          })
         })
       }
     }
