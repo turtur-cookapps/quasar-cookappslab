@@ -4,6 +4,7 @@
     <q-layout-header>
       <q-toolbar>
         <q-toolbar-title>CookAppsLab</q-toolbar-title>
+        <q-btn dense flat icon="menu" label="LogOut" @click=onClickForlogOut></q-btn>
       </q-toolbar>
     </q-layout-header>
     <q-page-container>
@@ -15,6 +16,7 @@
 
 <script>
 import { openURL } from 'quasar'
+import firebase from 'firebase'
 
 export default {
   name: 'default-top',
@@ -23,7 +25,14 @@ export default {
     }
   },
   methods: {
-    openURL
+    openURL,
+    onClickForlogOut () {
+      firebase.auth().signOut().then(() => {
+        this.$q.dialog({title: 'ㅃㅃ!'}).then(() => {
+          this.$router.push('/')
+        })
+      })
+    }
   }
 }
 </script>

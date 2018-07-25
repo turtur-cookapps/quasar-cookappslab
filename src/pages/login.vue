@@ -6,9 +6,9 @@
         <h3>CookAppsLab!</h3>
       </div>
       <div class="col-12 text-center board">
-        <q-btn color="white" size="lg" text-color="orange-8">Log in with Google</q-btn>
+        <q-btn @click="onClick" color="white" size="lg" text-color="orange-8">Log in with Google</q-btn>
       </div>
-      <div class="col-12 text-center board">
+      <div class="col-12 text-center board" >
         <h6>Log in with email</h6>
       </div>
     </div>
@@ -19,11 +19,22 @@
 </style>
 
 <script>
+import firebase from 'firebase'
 export default {
   name: 'Login',
   data () {
     return {
-
+    }
+  },
+  methods: {
+    onClick () {
+      if (!firebase.auth().currentUser) {
+        let provider = new firebase.auth.GoogleAuthProvider()
+        firebase.auth().signInWithPopup(provider).then((result) => {
+          let user = result.user.displayName
+          this.$q.dialog({title: '가입완료!', message: user})
+        })
+      }
     }
   }
 }
@@ -32,13 +43,14 @@ export default {
 <style lang="stylus">
 @import '~variables'
 .bg
-  background-color $orange
+  background-color $orange-1
 .board
-  background-color $orange-7
+  background-color $orange-5
 .board > h3
   color white
   font-weight bold
 .board > h6
   color rgba(255, 255, 255, 0.5)
   font-weight 100
+  text-decoration line-through
 </style>
