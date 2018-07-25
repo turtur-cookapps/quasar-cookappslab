@@ -39,6 +39,6 @@ export default {
   color white
   font-weight bold
 .board > h6
-  color rgba(255, 255, 255, 0.5); 
+  color rgba(255, 255, 255, 0.5)
   font-weight 100
 </style>

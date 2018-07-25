@@ -20,7 +20,6 @@ export default {
   name: 'default-top',
   data () {
     return {
-      
     }
   },
   methods: {
