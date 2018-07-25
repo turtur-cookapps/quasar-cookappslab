@@ -1,5 +1,7 @@
 <template>
   <q-page class="flex flex-center">
+    {{$store.getters.example.aaa}}
+    <q-btn @click="onClick"></q-btn>
   </q-page>
 </template>
 
@@ -12,6 +14,11 @@ export default {
   data () {
     return {
 
+    }
+  },
+  methods: {
+    onClick () {
+      console.log(this.$store)
     }
   }
 }
