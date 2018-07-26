@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex flex-center">
-    {{$store.getters.example.aaa}}
+    {{aaa}}
     <q-btn @click="onClick"></q-btn>
   </q-page>
 </template>
@@ -9,6 +9,9 @@
 </style>
 
 <script>
+
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'PageIndex',
   data () {
@@ -20,6 +23,11 @@ export default {
     onClick () {
       console.log(this.$store)
     }
+  },
+  computed: {
+    ...mapGetters('cookappslab', [
+      'aaa'
+    ])
   }
 }
 </script>
