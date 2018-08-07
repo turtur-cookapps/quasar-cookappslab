@@ -19,6 +19,12 @@ export default {
 
     }
   },
+  created () {
+    this.$q.loading.show({
+      spinnerSize: 200, // in pixels
+      spinnerColor: 'orange'
+    })
+  },
   mounted () {
     var config = {
       apiKey: 'AIzaSyBnVm-EMwoY6GTOLt7vDx99chywobTrrTg',
@@ -33,6 +39,7 @@ export default {
 
     if (!this.currentUser) {
       firebase.auth().onAuthStateChanged((user) => {
+        this.$q.loading.hide()
         if (user) {
           this.setCurrentUser(user)
           this.$router.replace('/main')
