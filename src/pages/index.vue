@@ -1,7 +1,6 @@
 <template>
   <q-page class="flex flex-center">
-    {{aaa}}
-    <q-btn @click="onClick"></q-btn>
+
   </q-page>
 </template>
 
@@ -10,23 +9,47 @@
 
 <script>
 
-import { mapGetters } from 'vuex'
+import firebase from 'firebase'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
-  name: 'PageIndex',
+  name: 'Index',
   data () {
     return {
 
     }
   },
-  methods: {
-    onClick () {
-      console.log(this.$store)
+  mounted () {
+    var config = {
+      apiKey: 'AIzaSyBnVm-EMwoY6GTOLt7vDx99chywobTrrTg',
+      authDomain: 'turtur-cookappslab.firebaseapp.com',
+      databaseURL: 'https://turtur-cookappslab.firebaseio.com',
+      projectId: 'turtur-cookappslab',
+      storageBucket: 'turtur-cookappslab.appspot.com',
+      messagingSenderId: '118371064312'
     }
+
+    firebase.initializeApp(config)
+
+    if (!this.currentUser) {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          this.setCurrentUser(user)
+          this.$router.replace('/main')
+        } else {
+          this.$router.replace('/login')
+        }
+      })
+    }
+  },
+  methods: {
+    ...mapMutations('cookappslab', [
+      'setCurrentUser'
+    ])
   },
   computed: {
     ...mapGetters('cookappslab', [
-      'aaa'
+      'currentUser'
     ])
   }
 }
