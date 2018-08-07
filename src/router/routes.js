@@ -1,7 +1,7 @@
 export default [
   {
     path: '/',
-    component: () => import('layouts/default-top'),
+    component: () => import('layouts/none'),
     children: [
       { path: '', component: () => import('pages/index') }
     ]
@@ -18,6 +18,13 @@ export default [
     component: () => import('layouts/default-top'),
     children: [
       { path: 'main', component: () => import('pages/main') }
+    ]
+  },
+  {
+    path: '/',
+    component: () => import('layouts/default-top'),
+    children: [
+      { path: 'user', component: () => import('pages/tabs/user') }
     ]
   },
   { // Always leave this as last one

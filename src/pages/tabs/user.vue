@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center">
     <div>
-      <h4>대시보드 들어갈 자리</h4>
+      <h4>유저 정보 들어갈 자리</h4>
     </div>
   </q-page>
 </template>
