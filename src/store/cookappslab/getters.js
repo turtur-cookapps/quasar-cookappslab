@@ -4,3 +4,6 @@ export const aaa = (state) => {
 export const bbb = (state) => {
   return state.bbb
 }
+export const currentUser = (state) => {
+  return state.currentUser
+}

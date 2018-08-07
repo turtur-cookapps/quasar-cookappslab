@@ -20,10 +20,17 @@
 
 <script>
 import firebase from 'firebase'
+import { mapMutations, mapGetters } from 'vuex'
+
 export default {
   name: 'Login',
   data () {
     return {
+    }
+  },
+  mounted () {
+    if (this.currentUser) {
+      this.$router.replace('/main')
     }
   },
   methods: {
@@ -31,13 +38,22 @@ export default {
       if (!firebase.auth().currentUser) {
         let provider = new firebase.auth.GoogleAuthProvider()
         firebase.auth().signInWithPopup(provider).then((result) => {
-          let user = result.user.displayName
-          this.$q.dialog({title: '가입완료!', message: user}).then(() => {
-            this.$router.push('/')
+          this.setCurrentUser(result.user)
+          let user = this.currentUser
+          this.$q.dialog({title: '가입완료!', message: user.displayName}).then(() => {
+            this.$router.push('/main')
           })
         })
       }
-    }
+    },
+    ...mapMutations('cookappslab', [
+      'setCurrentUser'
+    ])
+  },
+  computed: {
+    ...mapGetters('cookappslab', [
+      'currentUser'
+    ])
   }
 }
 </script>

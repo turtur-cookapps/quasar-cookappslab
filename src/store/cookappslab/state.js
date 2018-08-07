@@ -1,4 +1,5 @@
 export default {
-  aaa: 'stored data aaa',
-  bbb: 'stored data bbb'
+  test1: 'stored data test1',
+  test2: 'stored data test2',
+  currentUser: null
 }
