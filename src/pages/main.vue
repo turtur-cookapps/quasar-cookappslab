@@ -22,7 +22,7 @@ export default {
   },
   mounted () {
     if (!this.currentUser) {
-      this.$router.replace('/')
+      // this.$router.replace('/')
     }
   },
   methods: {

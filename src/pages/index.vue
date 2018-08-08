@@ -6,7 +6,7 @@
         <h3>CookAppsLab!</h3>
       </div>
       <div class="col-12 text-center board">
-        <q-btn @click="onClick" color="white" size="lg" text-color="orange-8">Log in with Google</q-btn>
+        <q-btn @click="onClickLoginBtn" color="white" size="lg" text-color="orange-8">Log in with Google</q-btn>
       </div>
       <div class="col-12 text-center board" >
         <h6>Log in with email</h6>
@@ -19,11 +19,10 @@
 </style>
 
 <script>
-import firebase from 'firebase'
-import { mapMutations, mapGetters } from 'vuex'
+import { mapMutations, mapGetters, mapActions } from 'vuex'
 
 export default {
-  name: 'Login',
+  name: 'Index',
   data () {
     return {
       config: {
@@ -37,45 +36,40 @@ export default {
     }
   },
   mounted () {
-    this.showLoading()
-    this.connectFirebase()
+    this.initFirebase(this.config)
+    this.checkLogin()
   },
   methods: {
+    checkLogin () {
+      this.showLoading()
+      this.redirectLoginFirebase().then(this.goToMain).catch(this.hideLoading)
+    },
+    onClickLoginBtn () {
+      this.showLoading()
+      this.loginFirebase().then(this.goToMain)
+    },
+    goToMain () {
+      this.hideLoading()
+      this.$router.push('/main')
+    },
+
     showLoading () {
       this.$q.loading.show({
         spinnerSize: 200, // in pixels
         spinnerColor: 'orange'
       })
     },
-    connectFirebase () {
-      if (!this.currentUser) {
-        firebase.initializeApp(this.config)
-        firebase.auth().onAuthStateChanged((user) => {
-          this.$q.loading.hide()
-          if (user) {
-            this.setCurrentUser(user)
-            this.$router.replace('/main')
-          }
-        })
-      } else {
-        this.$q.loading.hide()
-        this.$router.replace('/main')
-      }
+    hideLoading () {
+      this.$q.loading.hide()
     },
-    onClick () {
-      if (!firebase.auth().currentUser) {
-        let provider = new firebase.auth.GoogleAuthProvider()
-        firebase.auth().signInWithPopup(provider).then((result) => {
-          this.setCurrentUser(result.user)
-          let user = this.currentUser
-          this.$q.dialog({title: '가입완료!', message: user.displayName}).then(() => {
-            this.$router.push('/main')
-          })
-        })
-      }
-    },
+
     ...mapMutations('cookappslab', [
       'setCurrentUser'
+    ]),
+    ...mapActions('cookappslab', [
+      'initFirebase',
+      'loginFirebase',
+      'redirectLoginFirebase'
     ])
   },
   computed: {
