@@ -9,7 +9,7 @@
 export default {
   name: 'App',
   created () {
-    this.$q.loading.show()
+
   }
 }
 </script>
