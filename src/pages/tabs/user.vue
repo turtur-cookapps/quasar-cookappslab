@@ -1,8 +1,19 @@
 <template>
-  <q-page class="flex flex-center">
-    <div>
-      <h4>유저 정보 들어갈 자리</h4>
-    </div>
+  <q-page class="flex flex-left">
+      <div class="col-2">
+        <q-list>
+          <q-list-header>Users</q-list-header>
+          <q-item v-for="user in this.users" :key="user.uid">
+            <q-item-side left inverted :letter=user.name.substring(0,1) />
+            <q-item-main :label=user.name />
+            <q-item-main :label=user.type />
+            <q-item-side right icon="delete" color="gray" />
+          </q-item>
+        </q-list>
+      </div>
+      <div class="col-10 flex">
+        들어갈 내용
+      </div>
   </q-page>
 </template>
 
@@ -30,7 +41,8 @@ export default {
   },
   computed: {
     ...mapGetters('cookappslab', [
-      'currentUser'
+      'currentUser',
+      'users'
     ])
   }
 }
