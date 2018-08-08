@@ -70,7 +70,7 @@ export default {
       firebase.auth().signOut().then(() => {
         this.$q.dialog({title: 'ㅃㅃ!'}).then(() => {
           this.setCurrentUser(null)
-          this.$router.replace('/login')
+          this.$router.replace('/')
         })
       })
     },

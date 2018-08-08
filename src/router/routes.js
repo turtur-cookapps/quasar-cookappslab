@@ -10,13 +10,6 @@ export default [
     path: '/',
     component: () => import('layouts/default-top'),
     children: [
-      { path: 'login', component: () => import('pages/login') }
-    ]
-  },
-  {
-    path: '/',
-    component: () => import('layouts/default-top'),
-    children: [
       { path: 'main', component: () => import('pages/main') }
     ]
   },
