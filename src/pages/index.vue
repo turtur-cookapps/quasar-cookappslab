@@ -35,9 +35,8 @@ export default {
       messagingSenderId: '118371064312'
     }
 
-    firebase.initializeApp(config)
-
     if (!this.currentUser) {
+      firebase.initializeApp(config)
       firebase.auth().onAuthStateChanged((user) => {
         this.$q.loading.hide()
         if (user) {
@@ -47,6 +46,9 @@ export default {
           this.$router.replace('/login')
         }
       })
+    } else {
+      this.$q.loading.hide()
+      this.$router.replace('/main')
     }
   },
   methods: {
