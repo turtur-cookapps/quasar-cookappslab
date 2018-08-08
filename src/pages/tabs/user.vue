@@ -1,19 +1,14 @@
 <template>
   <q-page class="flex flex-left">
-      <div class="col-2">
-        <q-list>
-          <q-list-header>Users</q-list-header>
-          <q-item v-for="user in this.users" :key="user.uid">
-            <q-item-side left inverted :letter=user.name.substring(0,1) />
-            <q-item-main :label=user.name />
-            <q-item-main :label=user.type />
-            <q-item-side right icon="delete" color="gray" />
-          </q-item>
-        </q-list>
-      </div>
-      <div class="col-10 flex">
-        들어갈 내용
-      </div>
+    <q-table
+      :data="tableData"
+      :columns="columns"
+      selection="multiple"
+      :selected.sync="selectedSecond"
+      row-key="name"
+      color="secondary"
+    >
+    </q-table>
   </q-page>
 </template>
 
@@ -28,7 +23,121 @@ export default {
   name: 'Main',
   data () {
     return {
+      tableData: [
+        {
+          name: 'user1',
+          mail: 'a@a.com',
+          team: 'teamA',
+          param1: 0,
+          param2: 0,
+          param3: 0,
+          param4: 0,
+          param5: 0
+        },
+        {
+          name: 'user2',
+          mail: 'a@a.com',
+          team: 'teamA',
+          param1: 0,
+          param2: 0,
+          param3: 0,
+          param4: 0,
+          param5: 0
+        },
+        {
+          name: 'user3',
+          mail: 'a@a.com',
+          team: 'teamA',
+          param1: 0,
+          param2: 0,
+          param3: 0,
+          param4: 0,
+          param5: 0
+        },
+        {
+          name: 'user4',
+          mail: 'a@a.com',
+          team: 'teamA',
+          param1: 0,
+          param2: 0,
+          param3: 0,
+          param4: 0,
+          param5: 0
+        },
+        {
+          name: 'user5',
+          mail: 'a@a.com',
+          team: 'teamA',
+          param1: 0,
+          param2: 0,
+          param3: 0,
+          param4: 0,
+          param5: 0
+        },
+        {
+          name: 'user6',
+          mail: 'a@a.com',
+          team: 'teamA',
+          param1: 0,
+          param2: 0,
+          param3: 0,
+          param4: 0,
+          param5: 0
+        },
+        {
+          name: 'user7',
+          mail: 'a@a.com',
+          team: 'teamA',
+          param1: 0,
+          param2: 0,
+          param3: 0,
+          param4: 0,
+          param5: 0
+        },
+        {
+          name: 'user8',
+          mail: 'a@a.com',
+          team: 'teamA',
+          param1: 0,
+          param2: 0,
+          param3: 0,
+          param4: 0,
+          param5: 0
+        },
+        {
+          name: 'user9',
+          mail: 'a@a.com',
+          team: 'teamA',
+          param1: 0,
+          param2: 0,
+          param3: 0,
+          param4: 0,
+          param5: 0
+        },
+        {
+          name: 'user10',
+          mail: 'a@a.com',
+          team: 'teamA',
+          param1: 0,
+          param2: 0,
+          param3: 0,
+          param4: 0,
+          param5: 0
+        }
+      ],
+      columns: /* array of Objects */ [
+        { name: 'name', label: 'name', field: 'name', required: true, align: 'left', sortable: true },
+        { name: 'team', label: 'team', field: 'team', sortable: true },
+        { name: 'mail', label: 'mail', field: 'mail', sortable: true },
+        { name: 'param1', label: 'param1', field: 'param1' },
+        { name: 'param2', label: 'param2', field: 'param2' },
+        { name: 'param3', label: 'param3', field: 'param3' },
+        { name: 'param4', label: 'param4', field: 'param4', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
+        { name: 'param5', label: 'param5', field: 'param5', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
+      ],
+      selectedSecond: [
 
+      ]
     }
   },
   mounted () {
@@ -37,7 +146,9 @@ export default {
     }
   },
   methods: {
+    deleteRow () {
 
+    }
   },
   computed: {
     ...mapGetters('cookappslab', [
