@@ -4,7 +4,7 @@
     <q-layout-header>
       <q-toolbar>
         <q-toolbar-title>
-          <q-btn flat dense @onClick="onClickMainIcon">CookAppsLab</q-btn>
+          <q-btn flat dense @click="onClickMainIcon">CookAppsLab</q-btn>
         </q-toolbar-title>
         <q-btn v-if="this.currentUser" dense flat icon="menu" label="LogOut" @click=onClicklogOut></q-btn>
       </q-toolbar>
@@ -70,12 +70,12 @@ export default {
       firebase.auth().signOut().then(() => {
         this.$q.dialog({title: 'ㅃㅃ!'}).then(() => {
           this.setCurrentUser(null)
-          this.$router.push('/login')
+          this.$router.replace('/login')
         })
       })
     },
     onClickMainIcon () {
-      this.$router.push('/main')
+      this.$router.replace('/')
     },
     ...mapMutations('cookappslab', [
       'setCurrentUser'
