@@ -20,7 +20,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'User',
+  name: 'Group',
   data () {
     return {
       tableData: [

@@ -1,23 +1,12 @@
 export default [
   {
     path: '/',
-    component: () => import('layouts/none'),
-    children: [
-      { path: '', component: () => import('pages/index') }
-    ]
-  },
-  {
-    path: '/',
     component: () => import('layouts/default-top'),
     children: [
-      { path: 'main', component: () => import('pages/main') }
-    ]
-  },
-  {
-    path: '/',
-    component: () => import('layouts/default-top'),
-    children: [
-      { path: 'user', component: () => import('pages/tabs/user') }
+      { path: '', component: () => import('pages/index') },
+      { path: 'main', component: () => import('pages/main') },
+      { path: 'user', component: () => import('pages/tabs/user') },
+      { path: 'group', component: () => import('pages/tabs/group') }
     ]
   },
   { // Always leave this as last one
