@@ -25,18 +25,11 @@ export default {
   name: 'Index',
   data () {
     return {
-      config: {
-        apiKey: 'AIzaSyBnVm-EMwoY6GTOLt7vDx99chywobTrrTg',
-        authDomain: 'turtur-cookappslab.firebaseapp.com',
-        databaseURL: 'https://turtur-cookappslab.firebaseio.com',
-        projectId: 'turtur-cookappslab',
-        storageBucket: 'turtur-cookappslab.appspot.com',
-        messagingSenderId: '118371064312'
-      }
+
     }
   },
   mounted () {
-    this.initFirebase(this.config)
+    this.initFirebase(this.firebaseConfig)
     this.checkLogin()
   },
   methods: {
@@ -74,7 +67,8 @@ export default {
   },
   computed: {
     ...mapGetters('cookappslab', [
-      'currentUser'
+      'currentUser',
+      'firebaseConfig'
     ])
   }
 }

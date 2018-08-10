@@ -1,4 +1,12 @@
 export default {
+  firebaseConfig: {
+    apiKey: 'AIzaSyBnVm-EMwoY6GTOLt7vDx99chywobTrrTg',
+    authDomain: 'turtur-cookappslab.firebaseapp.com',
+    databaseURL: 'https://turtur-cookappslab.firebaseio.com',
+    projectId: 'turtur-cookappslab',
+    storageBucket: 'turtur-cookappslab.appspot.com',
+    messagingSenderId: '118371064312'
+  },
   currentUser: null,
   users: [
     {uid: '1', name: 'admin1', type: 'admin'},

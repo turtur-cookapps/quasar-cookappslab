@@ -34,6 +34,29 @@ export const loginFirebase = (dispatch) => {
   })
 }
 
-export const setUsers = (state, user) => {
-  state.users = user
+export const getUsers = (dispatch) => {
+  return new Promise((resolve, reject) => {
+    var db = firebase.firestore()
+    firebase.firestore().settings({ timestampsInSnapshots: true })
+    db.collection('users').get().then((snap) => {
+      dispatch.state.users = []
+      let user
+      snap.forEach(element => {
+        user = element.data()
+        user['uid'] = element.id
+        dispatch.state.users.push(user)
+      })
+      resolve(dispatch.state.users)
+    })
+  })
+}
+
+export const setUser = (dispatch, data) => {
+  return new Promise((resolve, reject) => {
+    var db = firebase.firestore()
+    firebase.firestore().settings({ timestampsInSnapshots: true })
+    db.collection('users').add(data).then((snap) => {
+      resolve(snap)
+    })
+  })
 }

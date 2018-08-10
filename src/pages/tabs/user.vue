@@ -1,14 +1,20 @@
 <template>
   <q-page class="flex flex-left">
+    <div>
     <q-table
       :data="tableData"
       :columns="columns"
       selection="multiple"
       :selected.sync="selectedSecond"
-      row-key="name"
+      row-key="uid"
       color="secondary"
     >
     </q-table>
+    <q-input value="" ref="inputName" float-label="name" placeholder="name"/>
+    <q-input value="" ref="inputType" float-label="type" placeholder="type"/>
+    <q-input value="" ref="inputMail" float-label="mail" placeholder="mail"/>
+    <q-btn label="create" @click="this.addUser"></q-btn>
+    </div>
   </q-page>
 </template>
 
@@ -17,115 +23,15 @@
 
 <script>
 
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'User',
   data () {
     return {
-      tableData: [
-        {
-          name: 'user1',
-          mail: 'a@a.com',
-          team: 'teamA',
-          param1: 0,
-          param2: 0,
-          param3: 0,
-          param4: 0,
-          param5: 0
-        },
-        {
-          name: 'user2',
-          mail: 'a@a.com',
-          team: 'teamA',
-          param1: 0,
-          param2: 0,
-          param3: 0,
-          param4: 0,
-          param5: 0
-        },
-        {
-          name: 'user3',
-          mail: 'a@a.com',
-          team: 'teamA',
-          param1: 0,
-          param2: 0,
-          param3: 0,
-          param4: 0,
-          param5: 0
-        },
-        {
-          name: 'user4',
-          mail: 'a@a.com',
-          team: 'teamA',
-          param1: 0,
-          param2: 0,
-          param3: 0,
-          param4: 0,
-          param5: 0
-        },
-        {
-          name: 'user5',
-          mail: 'a@a.com',
-          team: 'teamA',
-          param1: 0,
-          param2: 0,
-          param3: 0,
-          param4: 0,
-          param5: 0
-        },
-        {
-          name: 'user6',
-          mail: 'a@a.com',
-          team: 'teamA',
-          param1: 0,
-          param2: 0,
-          param3: 0,
-          param4: 0,
-          param5: 0
-        },
-        {
-          name: 'user7',
-          mail: 'a@a.com',
-          team: 'teamA',
-          param1: 0,
-          param2: 0,
-          param3: 0,
-          param4: 0,
-          param5: 0
-        },
-        {
-          name: 'user8',
-          mail: 'a@a.com',
-          team: 'teamA',
-          param1: 0,
-          param2: 0,
-          param3: 0,
-          param4: 0,
-          param5: 0
-        },
-        {
-          name: 'user9',
-          mail: 'a@a.com',
-          team: 'teamA',
-          param1: 0,
-          param2: 0,
-          param3: 0,
-          param4: 0,
-          param5: 0
-        },
-        {
-          name: 'user10',
-          mail: 'a@a.com',
-          team: 'teamA',
-          param1: 0,
-          param2: 0,
-          param3: 0,
-          param4: 0,
-          param5: 0
-        }
-      ],
+      tableData: [],
       columns: /* array of Objects */ [
+        { id: 'uid', label: 'uid', field: 'uid', required: true, align: 'left', sortable: true },
         { name: 'name', label: 'name', field: 'name', required: true, align: 'left', sortable: true },
         { name: 'team', label: 'team', field: 'team', sortable: true },
         { name: 'mail', label: 'mail', field: 'mail', sortable: true },
@@ -137,18 +43,46 @@ export default {
       ],
       selectedSecond: [
 
-      ]
+      ],
+      inputTextUserData: {
+        name: 'a',
+        type: 'a',
+        mail: 'a'
+      }
     }
   },
   mounted () {
     if (!this.currentUser) {
       this.$router.replace('/')
     }
+    this.getUsers().then((users) => {
+      this.tableData = users
+    })
+    // this.setUser('user1', {name:'user1', data1:'data1', data2:'data2'})
   },
   methods: {
-    deleteRow () {
-
-    }
+    addUser () {
+      this.inputTextUserData.name = this.$refs.inputName.model
+      this.inputTextUserData.type = this.$refs.inputType.model
+      this.inputTextUserData.mail = this.$refs.inputMail.model
+      this.setUser(this.inputTextUserData).then((snap) => {
+        this.$q.dialog({title: '완료!'}).then(() => {
+          this.$refs.inputName.model = ''
+          this.$refs.inputType.model = ''
+          this.$refs.inputMail.model = ''
+          this.reloadTable()
+        })
+      })
+    },
+    reloadTable () {
+      this.getUsers().then((users) => {
+        this.tableData = users
+      })
+    },
+    ...mapActions('cookappslab', [
+      'getUsers',
+      'setUser'
+    ])
   },
   computed: {
     ...mapGetters('cookappslab', [

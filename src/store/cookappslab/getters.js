@@ -4,3 +4,6 @@ export const currentUser = (state) => {
 export const users = (state) => {
   return state.users
 }
+export const firebaseConfig = (state) => {
+  return state.firebaseConfig
+}
